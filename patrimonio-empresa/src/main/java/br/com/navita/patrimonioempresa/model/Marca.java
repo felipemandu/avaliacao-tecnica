@@ -18,10 +18,6 @@ public class Marca {
 			   mappedBy = "marcaId")
 	private List<Patrimonio> patrimonio;
 
-	public Marca() {
-		this.marcaId = UUID.randomUUID();
-	}
-
 	public UUID getMarcaId() {
 		return marcaId;
 	}

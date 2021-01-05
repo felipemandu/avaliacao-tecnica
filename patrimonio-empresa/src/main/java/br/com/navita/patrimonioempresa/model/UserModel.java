@@ -2,16 +2,18 @@ package br.com.navita.patrimonioempresa.model;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
-public class User {
-
+@Table(name="users")
+public class UserModel {
+	
 	@Id
 	private String email;
 	private String nome;
 	private String senha;
 	private Boolean enabled;
-
+	
 	public String getNome() {
 		return nome;
 	}
@@ -59,5 +61,14 @@ public class User {
 	public void setEnabled(Boolean enabled) {
 		this.enabled = enabled;
 	}
+
+	@Override
+	public String toString() {
+		return "User:\n"
+				+ "email = " + email + "\n"
+				+ "nome = " + nome;
+	}
+
+
 
 }

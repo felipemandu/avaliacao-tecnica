@@ -18,11 +18,6 @@ public class Patrimonio {
 	private Marca marcaId;
 	@Column(columnDefinition = "TEXT")
 	private String descricao;
-	
-	
-	public Patrimonio() {
-		this.numeroDoTombo = UUID.randomUUID();
-	}
 
 	public UUID getNumeroDoTombo() {
 		return numeroDoTombo;
