@@ -11,5 +11,6 @@
 
 	<modules>
 		<module>exercicio1</module>
+		<module>patrimonio-empresa</module>
 	</modules>
 </project>
