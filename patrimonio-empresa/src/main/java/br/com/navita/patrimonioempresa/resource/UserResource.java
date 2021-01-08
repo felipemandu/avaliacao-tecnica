@@ -1,4 +1,4 @@
-package br.com.navita.patrimonioempresa.controller;
+package br.com.navita.patrimonioempresa.resource;
 
 import javax.validation.Valid;
 
@@ -9,25 +9,26 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.navita.patrimonioempresa.dto.UserDto;
-import br.com.navita.patrimonioempresa.repository.UserRepository;
+import br.com.navita.patrimonioempresa.exceptions.UserAlreadyExistException;
+import br.com.navita.patrimonioempresa.service.interfaces.IUserService;
+import br.com.navita.patrimonioempresa.utils.mapper.UserMapper;
 import br.com.navita.patrimonioempresa.view.UserView;
 
 @RestController
-@RequestMapping("/user")
-public class UserController {
+@RequestMapping("/api/user")
+public class UserResource {
 	
-	private UserRepository userRepository;
-	
+	private IUserService userService;
+
 	@Autowired
-	public UserController(UserRepository userRepository) {
-		this.userRepository = userRepository;
+	public UserResource(IUserService userService) {
+		this.userService = userService;
 	}
 
-
-	@PostMapping
-	public UserView postUser(@Valid @RequestBody UserDto userDto) {
-		userRepository.save(userDto.toUser());
-		return userDto.toUserView();
+	@PostMapping( produces = "application/json")
+	public UserView postUser(@Valid @RequestBody UserDto userDto) throws UserAlreadyExistException {
+		var user = userService.createUser(userDto);
+		return UserMapper.viewFromModel(user);
 	}
 	
 
