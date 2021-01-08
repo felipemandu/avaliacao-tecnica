@@ -10,10 +10,10 @@ CREATE TABLE IF NOT EXISTS Patrimonio (
 	numero_do_tombo uuid DEFAULT uuid_generate_v4 (), 
 	descricao TEXT, 
 	nome VARCHAR(255), 
-	marca_id_marca_id uuid, 
+	marca_id uuid, 
 	PRIMARY KEY (numero_do_tombo),
 	CONSTRAINT foreign_key_marca
-      FOREIGN KEY(marca_id_marca_id) 
+      FOREIGN KEY(marca_id) 
 	  REFERENCES Marca
 );
 
