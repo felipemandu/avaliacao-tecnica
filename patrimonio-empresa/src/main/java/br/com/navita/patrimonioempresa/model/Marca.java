@@ -8,15 +8,23 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import org.springframework.stereotype.Component;
+
 @Entity
+@Component
 public class Marca {
 
 	@Id
 	private UUID marcaId;
+
 	private String nome;
-	@OneToMany(cascade = CascadeType.ALL, 
-			   mappedBy = "marcaId")
+
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "marcaId")
 	private List<Patrimonio> patrimonio;
+
+	public Marca() {
+		marcaId = UUID.randomUUID();
+	}
 
 	public UUID getMarcaId() {
 		return marcaId;
@@ -32,6 +40,15 @@ public class Marca {
 
 	public void setNome(String nome) {
 		this.nome = nome;
+	}
+
+
+	public void addPatrimonio(Patrimonio patrimonio) {
+		getPatrimonio().add(patrimonio);
+	}
+
+	public List<Patrimonio> getPatrimonio() {
+		return patrimonio;
 	}
 
 }
