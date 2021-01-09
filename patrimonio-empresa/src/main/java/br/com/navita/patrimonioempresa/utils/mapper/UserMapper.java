@@ -1,5 +1,7 @@
 package br.com.navita.patrimonioempresa.utils.mapper;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
 import br.com.navita.patrimonioempresa.dto.UserDto;
 import br.com.navita.patrimonioempresa.model.UserModel;
 import br.com.navita.patrimonioempresa.view.UserView;
@@ -10,7 +12,7 @@ public class UserMapper {
 		UserModel user = new UserModel();
 		user.setEmail(userDto.getEmail());
 		user.setNome(userDto.getNome());
-		user.setSenha(userDto.getSenha());
+		user.setSenha(new BCryptPasswordEncoder().encode(userDto.getSenha()));
 		user.setEnabled(true);
 		return user;
 	}

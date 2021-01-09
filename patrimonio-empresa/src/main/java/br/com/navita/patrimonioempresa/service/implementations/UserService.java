@@ -1,6 +1,9 @@
 package br.com.navita.patrimonioempresa.service.implementations;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import br.com.navita.patrimonioempresa.dto.UserDto;
@@ -11,7 +14,7 @@ import br.com.navita.patrimonioempresa.service.interfaces.IUserService;
 import br.com.navita.patrimonioempresa.utils.mapper.UserMapper;
 
 @Service
-public class UserService implements IUserService{
+public class UserService implements IUserService, UserDetailsService{
 	
 	private UserRepository userRepository;
 	
@@ -29,6 +32,12 @@ public class UserService implements IUserService{
 		if (userRepository.findById(userDto.getEmail()).isPresent()) {
 			throw new UserAlreadyExistException("Já existe usuário com email informado.");
 		}
+	}
+
+	@Override
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		return userRepository.findByEmail(username).get();
+
 	}
 	
 

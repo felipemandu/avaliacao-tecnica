@@ -66,9 +66,9 @@ public class PatrimonioResource {
 	}
 
 	@GetMapping(value = "/marcaNome/", produces = "application/json")
-	public Page<PatrimonioView> getPatrimonioByMarcaNomeLike(@PathParam("marcaNomeLike") @NotBlank @Min(12) String nome, 
+	public Page<PatrimonioView> getPatrimonioByMarcaNomeLike(@PathParam("nomeLike") @NotBlank @Min(12) String nomeLike, 
 			@PathParam("page") Integer page) {
-		Page<Patrimonio> patrimonios = patrimonioService.findByMarcaNomeLike(nome, page);
+		Page<Patrimonio> patrimonios = patrimonioService.findByMarcaNomeLike(nomeLike, page);
 		return pagePatrimonioViewFromPagePatrimonio(patrimonios);
 	}
 

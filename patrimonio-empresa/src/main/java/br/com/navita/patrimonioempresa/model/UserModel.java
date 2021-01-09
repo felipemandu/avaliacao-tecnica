@@ -1,12 +1,17 @@
 package br.com.navita.patrimonioempresa.model;
 
+import java.util.Collection;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
 @Entity
 @Table(name="users")
-public class UserModel {
+public class UserModel implements UserDetails{
 	
 	@Id
 	private String email;
@@ -67,6 +72,31 @@ public class UserModel {
 		return "User:\n"
 				+ "email = " + email + "\n"
 				+ "nome = " + nome;
+	}
+
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		return null;
+	}
+
+	@Override
+	public boolean isAccountNonExpired() {
+		return true;
+	}
+
+	@Override
+	public boolean isAccountNonLocked() {
+		return true;
+	}
+
+	@Override
+	public boolean isCredentialsNonExpired() {
+		return true;
+	}
+
+	@Override
+	public boolean isEnabled() {
+		return true;
 	}
 
 	
