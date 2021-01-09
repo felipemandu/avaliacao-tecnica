@@ -16,6 +16,11 @@ import org.springframework.security.oauth2.provider.token.TokenStore;
 @Configuration
 @EnableResourceServer
 @EnableAuthorizationServer
+/**
+ * Implementação de segurança realiza seguido como exemplo https://academiadev.gitbook.io/joinville/seguranca/oauth2
+ * @author felipe
+ *
+ */
 public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
 
     @Autowired

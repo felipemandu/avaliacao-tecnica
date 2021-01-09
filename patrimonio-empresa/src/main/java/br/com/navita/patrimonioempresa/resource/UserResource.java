@@ -15,7 +15,7 @@ import br.com.navita.patrimonioempresa.utils.mapper.UserMapper;
 import br.com.navita.patrimonioempresa.view.UserView;
 
 @RestController
-@RequestMapping("/api/user")
+@RequestMapping("/api/user/")
 public class UserResource {
 	
 	private IUserService userService;

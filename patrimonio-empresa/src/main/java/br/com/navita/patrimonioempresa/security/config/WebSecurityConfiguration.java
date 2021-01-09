@@ -9,6 +9,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -37,13 +38,15 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests().
-        antMatchers("/swagger-ui/**", 
+        http
+        .csrf().disable()
+        .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+        .and()
+        .authorizeRequests()
+        .antMatchers("/swagger-ui/**", 
 	        		"/configuration/**", 
 	        		"/swagger-resources/**", 
-	        		"/v2/api-docs",
-	        		"/api/user",
-	        		"api/user/*")
+	        		"/v2/api-docs")
         	.permitAll()
 		.anyRequest()
 		.authenticated();
@@ -54,9 +57,10 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     public void configure(WebSecurity web) throws Exception {
         web.ignoring()
         .antMatchers("/swagger-ui/**", 
-					        		"/configuration/**", 
-					        		"/swagger-resources/**", 
-					        		"/v2/api-docs");
+	        		"/configuration/**", 
+	        		"/swagger-resources/**", 
+	        		"/v2/api-docs",
+	        		"/api/user/");
     }
 
     @Override

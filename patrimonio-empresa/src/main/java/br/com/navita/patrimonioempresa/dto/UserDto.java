@@ -1,10 +1,11 @@
 package br.com.navita.patrimonioempresa.dto;
 
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 
 public class UserDto {
 
-	@NotBlank
+	@Email
 	private String email;
 	@NotBlank
 	private String nome;
